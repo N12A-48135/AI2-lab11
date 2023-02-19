@@ -1,15 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  template: `
+    <h2>Lista elementów</h2>
+    <form (ngSubmit)="addItem()" #form="ngForm">
+      <input type="text" [(ngModel)]="newItem" name="newItem" required>
+      <button type="submit">Dodaj</button>
+    </form>
+    <ul>
+      <li *ngFor="let item of items; let i = index">
+        {{ item }} 
+        <button (click)="removeItem(i)">Usuń</button>
+      </li>
+    </ul>
+  `,
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
+  newItem: string = '';
+  items: string[] = [];
 
-  constructor() { }
-
-  ngOnInit() {
+  addItem() {
+    if (this.newItem.trim()) {
+      this.items.push(this.newItem);
+      this.newItem = '';
+    }
   }
 
+  removeItem(index: number) {
+    this.items.splice(index, 1);
+  }
 }

@@ -1,9 +1,19 @@
 import 'zone.js/dist/zone';
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { bootstrapApplication } from '@angular/platform-browser';
-import { RandomService } from './random.service';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { RandomComponent } from './random/random.component';
+import { ListComponent } from './list/list.component';
+
+@NgModule({
+  declarations: [RandomComponent, ListComponent],
+  imports: [BrowserModule],
+  providers: [],
+
+})
+export class AppModule {}
+
+platformBrowserDynamic().bootstrapModule(AppModule);
 
 @Component({
   selector: 'app',
